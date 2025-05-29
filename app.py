@@ -42,6 +42,9 @@ class AccessibleRAGChatbot:
         self.setup_apis()
         self.setup_accessibility()
     
+    def setup_database(self):
+        """Initialize SQLite for chat history"""
+        # --- FIX: DeprecationWarning for datetime adapter in sqlite3 ---
         sqlite3.register_adapter(datetime, lambda ts: ts.isoformat())
         sqlite3.register_adapter(date, lambda d: d.isoformat()) # Also register date if you use date objects
         
@@ -66,6 +69,7 @@ class AccessibleRAGChatbot:
             )
         ''')
         self.conn.commit()
+    
 
     
     def setup_apis(self):
